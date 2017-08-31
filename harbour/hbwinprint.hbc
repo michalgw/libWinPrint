@@ -1,0 +1,5 @@
+description=WinPrint library
+
+incpaths=.
+
+libs=${_HB_DYNPREF}${hb_name}${_HB_DYNSUFF}
