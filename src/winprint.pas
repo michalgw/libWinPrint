@@ -109,13 +109,13 @@ begin
 end;
 
 procedure ReadANDConvert2(CodePage: TCodePage;  //CodePage index
-                            InputData: string;     //input file
+                            InputData: RawByteString;     //input file
                               var SL: TStringList;//output strings
             UseCustomConversionTable: boolean;
                      ConversionItems: TConversionItems);
 var
   FS: TStringStream;
-  Buffer: string;
+  Buffer, BR: RawByteString;
   Count,i: integer;
   SS: TStringStream;
   XLATTable: array[char] of char;
@@ -137,10 +137,10 @@ begin
          if ci<>nil then XLATTable[char(ci.Incode)]:=char(ci.Outcode);
        end;
   end;
-  FS:=TStringStream.Create(InputData);
+  FS:=TStringStream.CreateRaw(InputData);
   try
     SetLength(Buffer,1024);
-    SS:=TStringStream.Create('');
+    SS:=TStringStream.Create('', CP_NONE);
     try
       while (FS.Position<FS.Size) do
       begin
@@ -153,7 +153,8 @@ begin
         else begin
           for i:=1 to Count do
             Buffer[i]:=XLATTable[Buffer[i]];
-          SS.WriteString(copy(Buffer,1,Count));
+          BR := copy(Buffer,1,Count);
+          SS.WriteBuffer(BR[1], Count);
         end;
       end;
     finally
@@ -184,7 +185,7 @@ begin
   PrintFont.Size := AFontSize;
   if not Assigned(SL) then
     SL := TStringList.Create;
-  ReadANDConvert2(TCodePage(ACodePage), String(ADataToPrint), SL, false, nil);
+  ReadANDConvert2(TCodePage(ACodePage), RawByteString(ADataToPrint), SL, false, nil);
   Printer.Refresh;
   for I := 1 to ACopies do
   begin
