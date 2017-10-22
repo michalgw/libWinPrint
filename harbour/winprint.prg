@@ -24,7 +24,7 @@ FUNCTION WinPrintPrint( cDataToPrint, cPrinterName, nCopies, nOrientation, ;
          HB_DYN_CTYPE_INT, HB_DYN_CTYPE_CHAR_PTR, HB_DYN_CTYPE_INT, ;
          HB_DYN_CTYPE_DOUBLE, HB_DYN_CTYPE_DOUBLE, HB_DYN_CTYPE_DOUBLE, ;
          HB_DYN_CTYPE_DOUBLE, HB_DYN_CTYPE_INT, HB_DYN_CTYPE_INT, ;
-         HB_DYN_CTYPE_CHAR_PTR, HB_DYN_CTYPE_CHAR_PTR }, cDataToPrint, ;
+         HB_DYN_CTYPE_CHAR_PTR, HB_DYN_CTYPE_INT }, cDataToPrint, ;
          cPrinterName, nCopies, nOrientation, cFontName, nFontSize, ;
          nMarginL, nMarginR, nMarginT, nMarginB, nLinesPerInch, ;
          nLinesPerPage, cTitle, nCodePage )
